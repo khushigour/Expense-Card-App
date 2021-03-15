@@ -18,7 +18,7 @@ const List = [
 ];
 
 const Amount = ({name, amount}) =>(
-  <div>
+  <div className="amount">
     <h2>{name}</h2>
     <p>${amount}</p>
   </div>
@@ -26,19 +26,24 @@ const Amount = ({name, amount}) =>(
 
 
 const Searchbox = ({handleList, handleCost, handleDescription}) => (
-  <form>
-    <label htmlFor="Cost">Cost</label>
-    <input 
-      id="Cost" 
-      type="number"
-      onChange={handleCost}/>
-    <label htmlFor="Description">
-      Description
-    </label>
-    <input 
-      id="Description" 
-      type="text"
-      onChange = {handleDescription}/>
+  <form >
+    <h3>Add more items</h3>
+    <div className="cost">
+      <label htmlFor="Cost">Cost:</label>
+      <input 
+        id="Cost" 
+        type="number"
+        onChange={handleCost}/>
+    </div>
+    <div className="description">
+      <label htmlFor="Description">
+        Description:
+      </label>
+      <input 
+        id="Description" 
+        type="text"
+        onChange = {handleDescription}/>
+    </div>
     <button onClick={e => handleList(e)}>
         Add
     </button>
@@ -95,16 +100,23 @@ const App = () => {
 
 
 const Listdisplay = ({lists, handleRemove}) => (
-  <div>
+  <div className="list">
    {console.log(lists)}
+   <table>
+   <tr className="items">
+     <th>Cost of Item</th>
+     <th>Description</th>
+     <th>Delete</th>
+   </tr>
     {lists.map(item =>(
-      <div key={item.description}>
-        <div> {item.description} </div>
-        <div> {item.cost} </div>
-        <button onClick = {() =>handleRemove(item)}>Dismiss</button>
-      </div>
+      <tr key={item.description}>
+        <th id="items_description"> {item.description} </th>
+        <th id="items_cost"> {item.cost} </th>
+      <th> <button onClick = {() =>handleRemove(item)}>&#10006;</button> </th>
+      </tr>
     ))
    }
+   </table>
   </div>
 );
 
